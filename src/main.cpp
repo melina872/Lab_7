@@ -4,13 +4,14 @@
 #include <Adafruit_BMP280.h>
 
 Adafruit_BMP280 bmp;
+float temperature;
 
-void setup()
-{
+void setup(){
   Serial.begin(115200);
   Serial.println("Program Started");	
   
   // BMP280 code
+  //Initialization 
   Wire.begin();
  
   if(bmp.begin(0x76)){
@@ -27,4 +28,12 @@ void setup()
 	// Server start
 }
 void loop(){
+  //Temperature Data recording
+  temperature = bmp.readTemperature();
+  
+  Serial.print("Temperature: ");
+  Serial.print(temperature);
+  Serial.println(" C");
+  
+  delay(1000);
 }
