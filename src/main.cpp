@@ -176,6 +176,14 @@ void handleLEDOn()
 	server.send(303);
 }
 
+void handleLEDOff()
+{
+  Serial.println("LED OFF Route Accessed");
+	digitalWrite( ledPin, LOW );
+	server.sendHeader("Location", "/" );
+	server.send(303);
+}
+
 
 void setup(){
   Serial.begin(115200);
