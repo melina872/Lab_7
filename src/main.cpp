@@ -2,9 +2,14 @@
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BMP280.h>
+#include <WiFi.h>
 
 Adafruit_BMP280 bmp;
 float temperature;
+
+//Wi-Fi constants
+const char* ssid = "BMP280_Wifi";
+const char* password = "Password";
 
 void setup(){
   Serial.begin(115200);
@@ -21,9 +26,13 @@ void setup(){
     Serial.println("BMP280 Not Found");
   }
 
-
 	// LED code
 	// Wi-Fi code
+  WiFi.softAP( ssid, password );
+  Serial.print("IP Address: ");
+  
+  Serial.println(WiFi.softAPIP());
+
 	// Routes
 	// Server start
 }
