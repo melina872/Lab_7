@@ -3,6 +3,7 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BMP280.h>
 #include <WiFi.h>
+#include <WebServer.h>
 
 Adafruit_BMP280 bmp;
 float temperature;
@@ -10,6 +11,9 @@ float temperature;
 //Wi-Fi constants
 const char* ssid = "BMP280_Wifi";
 const char* password = "Password";
+
+//Web Server variable
+WebServer server(80);
 
 void setup(){
   Serial.begin(115200);
@@ -35,6 +39,9 @@ void setup(){
 
 	// Routes
 	// Server start
+  server.begin();
+  Serial.println("Web Server Started");
+
 }
 void loop(){
   //Temperature Data recording
