@@ -12,6 +12,9 @@ float temperature;
 const char* ssid = "BMP280_Wifi";
 const char* password = "Password";
 
+//LED variable
+const int ledPin = 23;
+
 //Web Server variable
 WebServer server(80);
 
@@ -165,6 +168,7 @@ void handleRoot(){
  server.send( 200, "text/html", page);
 }
 
+
 void setup(){
   Serial.begin(115200);
   Serial.println("Program Started");	
@@ -181,6 +185,7 @@ void setup(){
   }
 
 	// LED code
+  pinMode( ledPin, LOW);
 	// Wi-Fi code
   WiFi.softAP( ssid, password );
   Serial.print("IP Address: ");
