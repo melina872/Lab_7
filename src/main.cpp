@@ -163,6 +163,8 @@ const char webpage[] PROGMEM = R"rawliteral(
 
 // Create the following function after the webpage code:
 void handleRoot(){
+  temperature = bmp.readTemperature();
+ 
  String page = webpage;
  page.replace( "TEMP_PLACEHOLDER", String(temperature, 1) + " ◦C" );
  server.send( 200, "text/html", page);
@@ -201,7 +203,7 @@ void setup(){
   }
 
 	// LED code
-  pinMode( ledPin, LOW);
+  pinMode( ledPin, OUTPUT);
 	// Wi-Fi code
   WiFi.softAP( ssid, password );
   Serial.print("IP Address: ");
@@ -209,18 +211,18 @@ void setup(){
   Serial.println(WiFi.softAPIP());
 
 	// Routes
+  server.on( "/", handleRoot );
+
+  server.on("/on", handleLEDOn );
+
+  server.on("/off", handleLEDOff);
+
+
 	// Server start
   server.begin();
   Serial.println("Web Server Started");
 
 }
 void loop(){
-  //Temperature Data recording
-  temperature = bmp.readTemperature();
-  
-  Serial.print("Temperature: ");
-  Serial.print(temperature);
-  Serial.println(" C");
-  
-  delay(1000);
+  server.handleClient();
 }
