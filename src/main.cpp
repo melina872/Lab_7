@@ -168,6 +168,14 @@ void handleRoot(){
  server.send( 200, "text/html", page);
 }
 
+void handleLEDOn()
+{ 
+  Serial.println("LED ON Route Accessed");
+	digitalWrite(ledPin,HIGH);
+	server.sendHeader("Location", "/" );
+	server.send(303);
+}
+
 
 void setup(){
   Serial.begin(115200);
