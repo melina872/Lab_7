@@ -10,7 +10,7 @@ float temperature;
 
 //Wi-Fi constants
 const char* ssid = "BMP280_Wifi";
-const char* password = "Password";
+const char* password = "Password1";
 
 //LED variable
 const int ledPin = 23;
